@@ -22,11 +22,19 @@ let package = Package(
         ),
         .target(
             name: "GitHubStatusBarApp",
-            dependencies: []
+            dependencies: ["GitHubClient"]
         ),
         .testTarget(
             name: "GitHubStatusBarAppTests",
             dependencies: ["GitHubStatusBarApp"]
+        ),
+        .target(
+            name: "GitHubClient",
+            dependencies: []
+        ),
+        .testTarget(
+            name: "GitHubClientTests",
+            dependencies: ["GitHubClient"]
         )
     ]
 )
