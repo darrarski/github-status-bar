@@ -16,10 +16,6 @@ let package = Package(
             name: "GitHubStatusBarExecutable",
             dependencies: ["GitHubStatusBarApp"]
         ),
-        .testTarget(
-            name: "GitHubStatusBarExecutableTests",
-            dependencies: ["GitHubStatusBarExecutable"]
-        ),
         .target(
             name: "GitHubStatusBarApp",
             dependencies: ["GitHubClient"]
