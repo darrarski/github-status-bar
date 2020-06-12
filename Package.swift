@@ -10,7 +10,11 @@ let package = Package(
             targets: ["GitHubStatusBarExecutable"]
         )
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/darrarski/SwiftEndpoint.git", from: "1.0.0"),
+        .package(url: "https://github.com/Quick/Quick.git", from: "3.0.0"),
+        .package(url: "https://github.com/Quick/Nimble.git", from: "8.1.1")
+    ],
     targets: [
         .target(
             name: "GitHubStatusBarExecutable",
@@ -18,7 +22,7 @@ let package = Package(
         ),
         .target(
             name: "GitHubStatusBarApp",
-            dependencies: ["GitHubClient"]
+            dependencies: ["GitHubClient", "SwiftEndpoint"]
         ),
         .testTarget(
             name: "GitHubStatusBarAppTests",
@@ -26,11 +30,11 @@ let package = Package(
         ),
         .target(
             name: "GitHubClient",
-            dependencies: []
+            dependencies: ["SwiftEndpoint"]
         ),
         .testTarget(
             name: "GitHubClientTests",
-            dependencies: ["GitHubClient"]
+            dependencies: ["GitHubClient", "Quick", "Nimble"]
         )
     ]
 )
