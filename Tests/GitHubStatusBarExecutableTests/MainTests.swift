@@ -1,9 +1,9 @@
 import XCTest
 import class Foundation.Bundle
 
-final class GitHubStatusBarAppTests: XCTestCase {
+final class MainTests: XCTestCase {
 
-    func testExample() throws {
+    func testRun() throws {
         let binaryURL = Bundle.allBundles
             .first(where: { $0.bundlePath.hasSuffix(".xctest") })
             .map(\.bundleURL)?

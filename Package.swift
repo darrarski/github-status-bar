@@ -7,11 +7,19 @@ let package = Package(
     products: [
         .executable(
             name: "gh-bar",
-            targets: ["GitHubStatusBarApp"]
+            targets: ["GitHubStatusBarExecutable"]
         )
     ],
     dependencies: [],
     targets: [
+        .target(
+            name: "GitHubStatusBarExecutable",
+            dependencies: ["GitHubStatusBarApp"]
+        ),
+        .testTarget(
+            name: "GitHubStatusBarExecutableTests",
+            dependencies: ["GitHubStatusBarExecutable"]
+        ),
         .target(
             name: "GitHubStatusBarApp",
             dependencies: []
