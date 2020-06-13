@@ -50,7 +50,11 @@ let package = Package(
         ),
         .testTarget(
             name: "GitHubStatusBarAppTests",
-            dependencies: ["GitHubStatusBarApp"]
+            dependencies: [
+                "GitHubStatusBarApp",
+                "Quick",
+                "Nimble"
+            ]
         ),
         .target(
             name: "GitHubClient",

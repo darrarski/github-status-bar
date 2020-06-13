@@ -1,13 +1,19 @@
 import ComposableArchitecture
 
-struct AppState: Equatable {
-    var status: String
+public struct AppState: Equatable {
+    public init(status: String = "GitHub") {
+        self.status = status
+    }
+
+    public var status: String
 }
 
-enum AppAction {}
+public enum AppAction {}
 
-struct AppEnv {}
+public struct AppEnv {
+    public init() {}
+}
 
-typealias AppReducer = Reducer<AppState, AppAction, AppEnv>
+public typealias AppReducer = Reducer<AppState, AppAction, AppEnv>
 
-let appReducer = AppReducer.empty
+public let appReducer = AppReducer.empty
