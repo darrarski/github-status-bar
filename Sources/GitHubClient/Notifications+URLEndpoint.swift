@@ -41,6 +41,10 @@ extension Notifications {
     }
 
     private static func decode(data: Data, urlResponse: URLResponse) throws -> Response {
-        Response(notifications: try JSONDecoder().decode([Notification].self, from: data))
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+        let notifications = try decoder.decode([Notification].self, from: data)
+        return Response(notifications: notifications)
     }
 }

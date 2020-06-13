@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+import Difference
 @testable import GitHubClient
 import Combine
 import Foundation
@@ -71,9 +72,7 @@ class NotificationsURLEndpointSpec: QuickSpec {
 
             context("when correct URL response is received") {
                 beforeEach {
-                    let jsonString = """
-                            [{"id":"1"},{"id":"2"},{"id":"3"}]
-                            """
+                    let jsonString = "[\(Notification.fixtureJSON)]"
                     let data = jsonString.data(using: .utf8)!
                     let response = HTTPURLResponse(
                         url: URL(fileURLWithPath: "test"),
@@ -87,11 +86,7 @@ class NotificationsURLEndpointSpec: QuickSpec {
 
                 it("should complete with response") {
                     expect(didReceiveResponse).to(haveCount(1))
-                    expect(didReceiveResponse.first?.notifications) == [
-                        Notification(id: "1"),
-                        Notification(id: "2"),
-                        Notification(id: "3")
-                    ]
+                    expect(didReceiveResponse.first?.notifications).to(equalDiff([.fixture]))
                     expect(didCompleteWithSuccess) == true
                     expect(didCompleteWithError).to(beNil())
                 }
