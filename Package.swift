@@ -12,6 +12,10 @@ let package = Package(
     ],
     dependencies: [
         .package(
+            url: "https://github.com/pointfreeco/swift-composable-architecture.git",
+            from: "0.3.0"
+        ),
+        .package(
             url: "https://github.com/darrarski/SwiftEndpoint.git",
             from: "1.0.0"
         ),
@@ -36,6 +40,10 @@ let package = Package(
         .target(
             name: "GitHubStatusBarApp",
             dependencies: [
+                .product(
+                    name: "ComposableArchitecture",
+                    package: "swift-composable-architecture"
+                ),
                 "GitHubClient",
                 "SwiftEndpoint"
             ]
