@@ -1,6 +1,7 @@
 import Quick
 import Nimble
 @testable import StatusBar
+@testable import GitHub
 import Cocoa
 import ComposableArchitecture
 
@@ -8,6 +9,7 @@ class ViewSpec: QuickSpec {
     override func spec() {
         context("init") {
             enum TestAction {
+                case update(State)
                 case didReceiveAction(Action)
             }
 
@@ -23,6 +25,8 @@ class ViewSpec: QuickSpec {
                     initialState: initialState,
                     reducer: .init { state, action, _ in
                         switch action {
+                        case .update(let newState):
+                            state = newState
                         case .didReceiveAction(let action):
                             didReceiveActions.append(action)
                         }
@@ -64,6 +68,20 @@ class ViewSpec: QuickSpec {
 
                 it("should send action") {
                     expect(didReceiveActions) == [.terminateApp]
+                }
+            }
+
+            context("when notifications are updated") {
+                var newState: State!
+
+                beforeEach {
+                    newState = ViewStore(testStore).state
+                    newState.notifications = [.fixture]
+                    ViewStore(testStore).send(.update(newState))
+                }
+
+                it("should update item title") {
+                    expect(sut.item.button?.title) == "GitHub (1)"
                 }
             }
         }
