@@ -28,6 +28,11 @@ let package = Package(
             from: "8.1.1"
         ),
         .package(
+            name: "SnapshotTesting",
+            url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
+            from: "1.8.0"
+        ),
+        .package(
             url: "https://github.com/krzysztofzablocki/Difference.git",
             .revision("50d0cf263aeea38a96549472d65358defb60cdb0")
         )
@@ -53,7 +58,8 @@ let package = Package(
             dependencies: [
                 "GitHubStatusBarApp",
                 "Quick",
-                "Nimble"
+                "Nimble",
+                "SnapshotTesting"
             ]
         ),
         .target(

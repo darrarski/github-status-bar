@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+import SnapshotTesting
 @testable import GitHubStatusBarApp
 import Cocoa
 import ComposableArchitecture
@@ -34,6 +35,15 @@ class AppDelegateSpec: QuickSpec {
 
                 it("should status bar item have correct title") {
                     expect(sut.statusBarItem?.button?.title) == initialState.status
+                }
+
+                it("should status bar menu have correct snapshot") {
+                    if let view = sut.statusBarItem?.menu?.items.first?.view {
+                        view.appearance = NSAppearance(named: .aqua)
+                        assertSnapshot(matching: view, as: .image, named: "menu")
+                    } else {
+                        fail("view not found")
+                    }
                 }
             }
         }

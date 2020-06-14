@@ -1,6 +1,7 @@
 import Cocoa
 import Combine
 import ComposableArchitecture
+import SwiftUI
 
 public final class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -29,6 +30,14 @@ public final class AppDelegate: NSObject, NSApplicationDelegate {
                 self.statusBarItem?.button?.title = viewState.statusBarTitle
             })
             .store(in: &cancellables)
+
+        let menuView = MenuView()
+        let menuItem = NSMenuItem()
+        menuItem.view = NSHostingView(rootView: menuView)
+        menuItem.view?.setFrameSize(NSSize(width: 320, height: 480))
+        let menu = NSMenu()
+        menu.addItem(menuItem)
+        statusBarItem?.menu = menu
     }
 
 }
