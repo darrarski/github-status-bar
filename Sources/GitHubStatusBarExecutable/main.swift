@@ -2,8 +2,15 @@ import Cocoa
 import ComposableArchitecture
 import GitHubStatusBarApp
 
-let app = NSApplication.shared
-let store = Store(initialState: AppState(), reducer: appReducer, environment: AppEnv())
-let appDelegate = AppDelegate(store: store)
-app.delegate = appDelegate
-app.run()
+let nsApp = NSApplication.shared
+
+let app = App(store: Store(
+    initialState: AppState(),
+    reducer: appReducer,
+    environment: AppEnv(
+        appTerminator: nsApp.terminate(_:)
+    )
+))
+
+nsApp.delegate = app
+nsApp.run()
