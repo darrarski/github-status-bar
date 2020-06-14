@@ -1,10 +1,16 @@
+import GitHub
 import StatusBar
 
 public struct Environment {
-    public init(appTerminator: @escaping (Any?) -> Void) {
+    public init(
+        notificationsEndpoint: @escaping Notifications.Endpoint,
+        appTerminator: @escaping (Any?) -> Void
+    ) {
+        self.notificationsEndpoint = notificationsEndpoint
         self.appTerminator = appTerminator
     }
 
+    public var notificationsEndpoint: Notifications.Endpoint
     public var appTerminator: (Any?) -> Void
 }
 

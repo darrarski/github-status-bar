@@ -2,6 +2,7 @@ import Quick
 import Nimble
 @testable import App
 import Cocoa
+import Combine
 import ComposableArchitecture
 
 class AppSpec: QuickSpec {
@@ -18,6 +19,7 @@ class AppSpec: QuickSpec {
                     initialState: initialState,
                     reducer: reducer,
                     environment: .init(
+                        notificationsEndpoint: { _ in Empty().eraseToAnyPublisher() },
                         appTerminator: { _ in didTerminateApp = true }
                     )
                 )

@@ -41,6 +41,7 @@ let package = Package(
             name: "App",
             dependencies: [
                 "StatusBar",
+                "GitHub",
                 .product(
                     name: "ComposableArchitecture",
                     package: "swift-composable-architecture"
