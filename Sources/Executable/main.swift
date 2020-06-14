@@ -9,7 +9,8 @@ let appView: App.View = .init(store: .init(
     reducer: reducer,
     environment: .init(
         notificationsEndpoint: Notifications.urlEndpoint(),
-        appTerminator: app.terminate(_:)
+        appTerminator: app.terminate(_:),
+        mainQueue: AnyScheduler(DispatchQueue.main)
     )
 ))
 

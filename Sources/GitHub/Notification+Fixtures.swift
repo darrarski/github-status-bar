@@ -1,8 +1,8 @@
-@testable import GitHub
 import Foundation
 
-extension GitHub.Notification {
-    static let fixture: GitHub.Notification = .init(
+#if DEBUG
+extension Notification {
+    static let fixture: Notification = .init(
         id: "1",
         repository: .init(
             id: 1296269,
@@ -174,3 +174,4 @@ extension GitHub.Notification {
 private func date(from string: String) -> Date {
     ISO8601DateFormatter().date(from: string)!
 }
+#endif

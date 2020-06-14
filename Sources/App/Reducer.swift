@@ -21,6 +21,7 @@ public let reducer = Reducer.combine(
                 .map(\.notifications)
                 .map(Action.didFetchNotifications)
                 .catch { _ in Empty() }
+                .receive(on: env.mainQueue)
                 .eraseToEffect()
 
         case .didFetchNotifications(let notifications):

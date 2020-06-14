@@ -2,7 +2,7 @@ import Foundation
 import SwiftEndpoint
 
 public struct Notifications {
-    public struct Request {
+    public struct Request: Equatable {
         public init(
             auth: Auth,
             all: Bool = false
@@ -15,7 +15,7 @@ public struct Notifications {
         public var all: Bool
     }
 
-    public struct Response {
+    public struct Response: Equatable {
         public var notifications: [Notification]
     }
 

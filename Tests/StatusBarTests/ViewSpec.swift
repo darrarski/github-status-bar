@@ -4,34 +4,46 @@ import Nimble
 import Cocoa
 import ComposableArchitecture
 
-class StatusBarSpec: QuickSpec {
+class ViewSpec: QuickSpec {
     override func spec() {
-        describe("view") {
+        context("init") {
+            enum TestAction {
+                case didReceiveAction(Action)
+            }
+
             var sut: View!
             var initialState: State!
-            var store: StatusBar.Store!
-            var didTerminateApp: Bool!
+            var testStore: ComposableArchitecture.Store<State, TestAction>!
+            var didReceiveActions: [Action]!
 
             beforeEach {
-                initialState = .init()
-                store = .init(
+                initialState = State()
+                didReceiveActions = []
+                testStore = .init(
                     initialState: initialState,
-                    reducer: reducer,
-                    environment: .init(
-                        appTerminator: { _ in didTerminateApp = true }
-                    )
+                    reducer: .init { state, action, _ in
+                        switch action {
+                        case .didReceiveAction(let action):
+                            didReceiveActions.append(action)
+                        }
+                        return .none
+                    },
+                    environment: ()
                 )
-                sut = .init(store: store)
+                sut = .init(store: testStore.scope(
+                    state: { $0 },
+                    action: TestAction.didReceiveAction
+                ))
             }
 
             afterEach {
                 sut = nil
                 initialState = nil
-                store = nil
-                didTerminateApp = nil
+                testStore = nil
+                didReceiveActions = nil
             }
 
-            it("should item have correct menu") {
+            it("should have correct menu") {
                 expect(sut.item.menu) === sut.menu
             }
 
@@ -50,8 +62,8 @@ class StatusBarSpec: QuickSpec {
                     sut.menu.performActionForItem(at: 0)
                 }
 
-                it("should terminate app") {
-                    expect(didTerminateApp) == true
+                it("should send action") {
+                    expect(didReceiveActions) == [.terminateApp]
                 }
             }
         }

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Auth {
+public struct Auth: Equatable {
     public init(username: String, accessToken: String) {
         self.username = username
         self.accessToken = accessToken
