@@ -6,8 +6,8 @@ public final class View {
     public init(store: Store) {
         self.store = store
         self.viewStore = .init(store.scope(
-            state: \.view,
-            action: Action.view
+            state: ViewState.state,
+            action: \.action
         ))
         item.menu = menu
         viewStore.$state

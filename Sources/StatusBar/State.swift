@@ -7,9 +7,3 @@ public struct State: Equatable {
 
     public var notifications: [Notification]
 }
-
-extension State {
-    var view: ViewState {
-        .init(title: "GitHub")
-    }
-}
