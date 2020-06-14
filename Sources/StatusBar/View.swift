@@ -13,10 +13,10 @@ public final class View {
             .store(in: &cancellables)
     }
 
-    let store: Store<State, Action>
     let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let menu = NSMenu()
 
+    private let store: Store<State, Action>
     private let viewStore: ViewStore<ViewState, Action>
     private var cancellables = Set<AnyCancellable>()
 

@@ -1,7 +1,6 @@
 import Quick
 import Nimble
 @testable import App
-@testable import StatusBar
 import Cocoa
 import ComposableArchitecture
 
@@ -14,7 +13,7 @@ class ViewSpec: QuickSpec {
 
             var sut: App.View!
             var initialState: App.State!
-            var testStore: ComposableArchitecture.Store<App.State, TestAction>!
+            var testStore: Store<App.State, TestAction>!
             var didReceiveActions: [App.Action]!
 
             beforeEach {
@@ -57,14 +56,8 @@ class ViewSpec: QuickSpec {
                     expect(sut.statusBarView).notTo(beNil())
                 }
 
-                it("should status bar have correct state") {
-                    guard let statusBarView = sut.statusBarView else { fail(); return }
-                    expect(ViewStore(statusBarView.store).state) == ViewStore(testStore).state.statusBar
-                }
-
                 it("should recieve action") {
-                    expect(didReceiveActions).to(haveCount(1))
-                    expect(didReceiveActions?.last) == Action.didFinishLaunching
+                    expect(didReceiveActions) == [.didFinishLaunching]
                 }
             }
         }

@@ -1,4 +1,3 @@
-import Foundation
 import SwiftEndpoint
 
 public struct Notifications {

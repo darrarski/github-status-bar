@@ -1,6 +1,6 @@
+#if DEBUG
 import Foundation
 
-#if DEBUG
 extension Notification {
     static let fixture: Notification = .init(
         id: "1",

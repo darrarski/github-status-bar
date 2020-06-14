@@ -1,5 +1,3 @@
-import Foundation
-
 public struct Auth: Equatable {
     public init(username: String, accessToken: String) {
         self.username = username

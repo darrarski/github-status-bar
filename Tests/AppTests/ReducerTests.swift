@@ -69,7 +69,7 @@ final class ReducerTests: XCTestCase {
         )
     }
 
-    func testStatsuBarTerminateApp() {
+    func testStatusBarTerminateApp() {
         var didTerminateApp = false
 
         let store = TestStore(

@@ -1,7 +1,5 @@
 import XCTest
 @testable import StatusBar
-@testable import GitHub
-import Combine
 import ComposableArchitecture
 
 final class ReducerTests: XCTestCase {

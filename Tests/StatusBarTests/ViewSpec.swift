@@ -15,7 +15,7 @@ class ViewSpec: QuickSpec {
 
             var sut: View!
             var initialState: State!
-            var testStore: ComposableArchitecture.Store<State, TestAction>!
+            var testStore: Store<State, TestAction>!
             var didReceiveActions: [Action]!
 
             beforeEach {

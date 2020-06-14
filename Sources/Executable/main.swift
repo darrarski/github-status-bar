@@ -4,7 +4,7 @@ import ComposableArchitecture
 import GitHub
 
 let app: NSApplication = .shared
-let appView: App.View = .init(store: .init(
+let appView: View = .init(store: .init(
     initialState: .init(),
     reducer: reducer,
     environment: .init(
