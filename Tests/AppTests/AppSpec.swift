@@ -6,22 +6,22 @@ import ComposableArchitecture
 
 class AppSpec: QuickSpec {
     override func spec() {
-        context("init") {
-            var sut: App!
-            var initialState: AppState!
-            var store: Store<AppState, AppAction>!
+        describe("view") {
+            var sut: View!
+            var initialState: State!
+            var store: App.Store!
             var didTerminateApp: Bool!
 
             beforeEach {
-                initialState = AppState()
-                store = Store(
+                initialState = .init()
+                store = .init(
                     initialState: initialState,
-                    reducer: appReducer,
-                    environment: AppEnv(
+                    reducer: reducer,
+                    environment: .init(
                         appTerminator: { _ in didTerminateApp = true }
                     )
                 )
-                sut = App(store: store)
+                sut = .init(store: store)
             }
 
             afterEach {
@@ -32,7 +32,7 @@ class AppSpec: QuickSpec {
             }
 
             it("should have no status bar") {
-                expect(sut.statusBar).to(beNil())
+                expect(sut.statusBarView).to(beNil())
             }
 
             context("when app finished launching") {
@@ -41,7 +41,7 @@ class AppSpec: QuickSpec {
                 }
 
                 it("should have status bar") {
-                    expect(sut.statusBar).notTo(beNil())
+                    expect(sut.statusBarView).notTo(beNil())
                 }
 
                 context("when status bar terminate app action is send") {

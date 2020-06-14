@@ -6,22 +6,22 @@ import ComposableArchitecture
 
 class StatusBarSpec: QuickSpec {
     override func spec() {
-        context("init") {
-            var sut: StatusBar!
-            var initialState: StatusBarState!
-            var store: Store<StatusBarState, StatusBarAction>!
+        describe("view") {
+            var sut: View!
+            var initialState: State!
+            var store: StatusBar.Store!
             var didTerminateApp: Bool!
 
             beforeEach {
-                initialState = StatusBarState()
-                store = Store(
+                initialState = .init()
+                store = .init(
                     initialState: initialState,
-                    reducer: statusBarReducer,
-                    environment: StatusBarEnv(
+                    reducer: reducer,
+                    environment: .init(
                         appTerminator: { _ in didTerminateApp = true }
                     )
                 )
-                sut = StatusBar(store: store)
+                sut = .init(store: store)
             }
 
             afterEach {
@@ -29,6 +29,10 @@ class StatusBarSpec: QuickSpec {
                 initialState = nil
                 store = nil
                 didTerminateApp = nil
+            }
+
+            it("should item have correct menu") {
+                expect(sut.item.menu) === sut.menu
             }
 
             it("should item have correct title") {
@@ -50,6 +54,10 @@ class StatusBarSpec: QuickSpec {
                     expect(didTerminateApp) == true
                 }
             }
+        }
+
+        it("MenuItem should not support NSCoding") {
+            expect { _ = MenuItem(coder: NSCoder()) }.to(throwAssertion())
         }
     }
 }

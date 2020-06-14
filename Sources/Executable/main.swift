@@ -2,15 +2,14 @@ import App
 import Cocoa
 import ComposableArchitecture
 
-let nsApp = NSApplication.shared
-
-let app = App(store: Store(
-    initialState: AppState(),
-    reducer: appReducer,
-    environment: AppEnv(
-        appTerminator: nsApp.terminate(_:)
+let app: NSApplication = .shared
+let appView: App.View = .init(store: .init(
+    initialState: .init(),
+    reducer: reducer,
+    environment: .init(
+        appTerminator: app.terminate(_:)
     )
 ))
 
-nsApp.delegate = app
-nsApp.run()
+app.delegate = appView
+app.run()
