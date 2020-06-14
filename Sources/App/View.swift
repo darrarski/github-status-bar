@@ -1,4 +1,5 @@
 import Cocoa
+import ComposableArchitecture
 import StatusBar
 
 public final class View: NSObject, NSApplicationDelegate {
@@ -15,6 +16,8 @@ public final class View: NSObject, NSApplicationDelegate {
             state: \.statusBar,
             action: Action.statusBar
         ))
+
+        ViewStore(store).send(.didFinishLaunching)
     }
 
     private let store: Store
