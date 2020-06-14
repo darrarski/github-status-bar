@@ -1,9 +1,12 @@
 import StatusBar
 
 public struct State: Equatable {
-    public init(statusBar: StatusBar.State = .init()) {
-        self.statusBar = statusBar
-    }
+    public init() {}
+}
 
-    public var statusBar: StatusBar.State
+extension State {
+    var statusBar: StatusBar.State {
+        get { .init() }
+        set {}
+    }
 }
