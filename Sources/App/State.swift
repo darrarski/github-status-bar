@@ -11,7 +11,7 @@ public struct State: Equatable {
 
 extension State {
     var statusBar: StatusBar.State {
-        get { .init() }
-        set {}
+        get { .init(notifications: notifications) }
+        set { notifications = newValue.notifications }
     }
 }

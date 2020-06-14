@@ -59,6 +59,7 @@ let package = Package(
         .target(
             name: "StatusBar",
             dependencies: [
+                "GitHub",
                 .product(
                     name: "ComposableArchitecture",
                     package: "swift-composable-architecture"

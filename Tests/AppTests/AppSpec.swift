@@ -75,6 +75,10 @@ class AppSpec: QuickSpec {
                     it("should have correct notifications") {
                         expect(ViewStore(store).state.notifications) == notifications
                     }
+
+                    it("should status bar have correct notifications") {
+                        expect(ViewStore(store).state.statusBar.notifications) == notifications
+                    }
                 }
 
                 context("when notifications fetching fails") {

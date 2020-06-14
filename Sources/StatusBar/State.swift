@@ -1,5 +1,11 @@
+import GitHub
+
 public struct State: Equatable {
-    public init() {}
+    public init(notifications: [Notification] = []) {
+        self.notifications = notifications
+    }
+
+    public var notifications: [Notification]
 }
 
 extension State {
