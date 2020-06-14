@@ -1,3 +1,3 @@
 public enum Action: Equatable {
-    case terminateApp
+    case didSelectQuit
 }

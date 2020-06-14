@@ -4,7 +4,7 @@ public typealias Reducer = ComposableArchitecture.Reducer<State, Action, Environ
 
 public let reducer = Reducer { state, action, env in
     switch action {
-    case .terminateApp:
+    case .didSelectQuit:
         env.appTerminator(nil)
         return .none
     }

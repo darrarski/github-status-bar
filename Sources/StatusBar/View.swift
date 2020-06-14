@@ -1,25 +1,23 @@
 import Cocoa
 import Combine
+import ComposableArchitecture
 
 public final class View {
 
-    public init(store: Store) {
+    public init(store: Store<State, Action>) {
         self.store = store
-        self.viewStore = .init(store.scope(
-            state: ViewState.state,
-            action: \.action
-        ))
+        self.viewStore = .init(store.scope(state: ViewState.state))
         item.menu = menu
         viewStore.$state
             .sink(receiveValue: { [unowned self] in self.update(viewState: $0) })
             .store(in: &cancellables)
     }
 
-    let store: Store
+    let store: Store<State, Action>
     let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let menu = NSMenu()
 
-    private let viewStore: ViewStore
+    private let viewStore: ViewStore<ViewState, Action>
     private var cancellables = Set<AnyCancellable>()
 
     private func update(viewState: ViewState) {

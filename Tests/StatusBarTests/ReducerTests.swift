@@ -18,7 +18,7 @@ final class ReducerTests: XCTestCase {
         )
 
         store.assert(
-            .send(.terminateApp),
+            .send(.didSelectQuit),
             .do { XCTAssert(didTerminateApp) }
         )
     }

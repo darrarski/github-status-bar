@@ -67,7 +67,7 @@ class ViewSpec: QuickSpec {
                 }
 
                 it("should send action") {
-                    expect(didReceiveActions) == [.terminateApp]
+                    expect(didReceiveActions) == [.didSelectQuit]
                 }
             }
 

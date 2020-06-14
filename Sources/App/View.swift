@@ -4,7 +4,7 @@ import StatusBar
 
 public final class View: NSObject, NSApplicationDelegate {
 
-    public init(store: Store) {
+    public init(store: Store<State, Action>) {
         self.store = store
         super.init()
     }
@@ -20,6 +20,6 @@ public final class View: NSObject, NSApplicationDelegate {
         ViewStore(store).send(.didFinishLaunching)
     }
 
-    private let store: Store
+    private let store: Store<State, Action>
 
 }
