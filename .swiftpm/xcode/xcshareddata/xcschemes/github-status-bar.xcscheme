@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "GitHubStatusBarExecutableTests"
-               BuildableName = "GitHubStatusBarExecutableTests"
-               BlueprintName = "GitHubStatusBarExecutableTests"
+               BlueprintIdentifier = "StatusBarTests"
+               BuildableName = "StatusBarTests"
+               BlueprintName = "StatusBarTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,9 +42,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "GitHubStatusBarAppTests"
-               BuildableName = "GitHubStatusBarAppTests"
-               BlueprintName = "GitHubStatusBarAppTests"
+               BlueprintIdentifier = "GitHubTests"
+               BuildableName = "GitHubTests"
+               BlueprintName = "GitHubTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AppTests"
+               BuildableName = "AppTests"
+               BlueprintName = "AppTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -56,9 +70,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "GitHubStatusBarApp"
-               BuildableName = "GitHubStatusBarApp"
-               BlueprintName = "GitHubStatusBarApp"
+               BlueprintIdentifier = "App"
+               BuildableName = "App"
+               BlueprintName = "App"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -70,9 +84,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "GitHubClient"
-               BuildableName = "GitHubClient"
-               BlueprintName = "GitHubClient"
+               BlueprintIdentifier = "GitHub"
+               BuildableName = "GitHub"
+               BlueprintName = "GitHub"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "StatusBar"
+               BuildableName = "StatusBar"
+               BlueprintName = "StatusBar"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -89,9 +117,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "GitHubStatusBarExecutableTests"
-               BuildableName = "GitHubStatusBarExecutableTests"
-               BlueprintName = "GitHubStatusBarExecutableTests"
+               BlueprintIdentifier = "StatusBarTests"
+               BuildableName = "StatusBarTests"
+               BlueprintName = "StatusBarTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -99,9 +127,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "GitHubStatusBarAppTests"
-               BuildableName = "GitHubStatusBarAppTests"
-               BlueprintName = "GitHubStatusBarAppTests"
+               BlueprintIdentifier = "GitHubTests"
+               BuildableName = "GitHubTests"
+               BlueprintName = "GitHubTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -109,9 +137,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "GitHubClientTests"
-               BuildableName = "GitHubClientTests"
-               BlueprintName = "GitHubClientTests"
+               BlueprintIdentifier = "AppTests"
+               BuildableName = "AppTests"
+               BlueprintName = "AppTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>

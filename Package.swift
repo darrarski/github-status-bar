@@ -7,7 +7,7 @@ let package = Package(
     products: [
         .executable(
             name: "gh-bar",
-            targets: ["GitHubStatusBarExecutable"]
+            targets: ["Executable"]
         )
     ],
     dependencies: [
@@ -34,36 +34,52 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "GitHubStatusBarExecutable",
-            dependencies: ["GitHubStatusBarApp"]
+            name: "Executable",
+            dependencies: ["App"]
         ),
         .target(
-            name: "GitHubStatusBarApp",
+            name: "App",
             dependencies: [
+                "StatusBar",
                 .product(
                     name: "ComposableArchitecture",
                     package: "swift-composable-architecture"
-                ),
-                "GitHubClient",
-                "SwiftEndpoint"
+                )
             ]
         ),
         .testTarget(
-            name: "GitHubStatusBarAppTests",
+            name: "AppTests",
             dependencies: [
-                "GitHubStatusBarApp",
+                "App",
                 "Quick",
                 "Nimble"
             ]
         ),
         .target(
-            name: "GitHubClient",
+            name: "StatusBar",
+            dependencies: [
+                .product(
+                    name: "ComposableArchitecture",
+                    package: "swift-composable-architecture"
+                )
+            ]
+        ),
+        .testTarget(
+            name: "StatusBarTests",
+            dependencies: [
+                "StatusBar",
+                "Quick",
+                "Nimble"
+            ]
+        ),
+        .target(
+            name: "GitHub",
             dependencies: ["SwiftEndpoint"]
         ),
         .testTarget(
-            name: "GitHubClientTests",
+            name: "GitHubTests",
             dependencies: [
-                "GitHubClient",
+                "GitHub",
                 "Quick",
                 "Nimble",
                 "Difference"

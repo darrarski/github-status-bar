@@ -1,8 +1,8 @@
-@testable import GitHubClient
+@testable import GitHub
 import Foundation
 
-extension GitHubClient.Notification {
-    static let fixture: GitHubClient.Notification = .init(
+extension GitHub.Notification {
+    static let fixture: GitHub.Notification = .init(
         id: "1",
         repository: .init(
             id: 1296269,

@@ -1,6 +1,6 @@
 import Quick
 import Nimble
-@testable import GitHubStatusBarApp
+@testable import StatusBar
 import Cocoa
 import ComposableArchitecture
 

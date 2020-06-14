@@ -1,6 +1,6 @@
+import App
 import Cocoa
 import ComposableArchitecture
-import GitHubStatusBarApp
 
 let nsApp = NSApplication.shared
 

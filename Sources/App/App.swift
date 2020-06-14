@@ -1,6 +1,7 @@
 import Cocoa
 import Combine
 import ComposableArchitecture
+import StatusBar
 
 public struct AppState: Equatable {
     public init(statusBar: StatusBarState = StatusBarState()) {

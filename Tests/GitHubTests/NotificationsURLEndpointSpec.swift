@@ -1,7 +1,7 @@
 import Quick
 import Nimble
 import Difference
-@testable import GitHubClient
+@testable import GitHub
 import Combine
 import Foundation
 
