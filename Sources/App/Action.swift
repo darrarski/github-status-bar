@@ -2,7 +2,7 @@ import StatusBar
 import GitHub
 
 public enum Action: Equatable {
-    case didFinishLaunching
+    case fetchNotifications
     case didFetchNotifications([Notification])
     case statusBar(StatusBar.Action)
 }

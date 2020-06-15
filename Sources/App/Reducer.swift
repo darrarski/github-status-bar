@@ -8,7 +8,7 @@ public typealias Reducer = ComposableArchitecture.Reducer<State, Action, Environ
 public let reducer = Reducer.combine(
     Reducer { state, action, env in
         switch action {
-        case .didFinishLaunching:
+        case .fetchNotifications:
             let request: Notifications.Request = .init(
                 auth: Auth( // TODO: get credentials from key-chain
                     username: "user",

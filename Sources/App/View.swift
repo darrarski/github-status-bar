@@ -17,7 +17,7 @@ public final class View: NSObject, NSApplicationDelegate {
             action: Action.statusBar
         ))
 
-        ViewStore(store).send(.didFinishLaunching)
+        ViewStore(store).send(.fetchNotifications)
     }
 
     private let store: Store<State, Action>

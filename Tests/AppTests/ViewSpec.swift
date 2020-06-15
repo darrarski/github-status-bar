@@ -57,7 +57,7 @@ class ViewSpec: QuickSpec {
                 }
 
                 it("should recieve action") {
-                    expect(didReceiveActions) == [.didFinishLaunching]
+                    expect(didReceiveActions) == [.fetchNotifications]
                 }
             }
         }

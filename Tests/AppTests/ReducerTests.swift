@@ -6,7 +6,7 @@ import ComposableArchitecture
 
 final class ReducerTests: XCTestCase {
 
-    func testAppLaunch() {
+    func testFetchingNotifications() {
         let scheduler = DispatchQueue.testScheduler
         let notificationsSubject = PassthroughSubject<Notifications.Response, Error>()
         var didRequestNotifications: [Notifications.Request] = []
@@ -25,7 +25,7 @@ final class ReducerTests: XCTestCase {
         )
 
         store.assert(
-            .send(.didFinishLaunching),
+            .send(.fetchNotifications),
             .do {
                 XCTAssertEqual(didRequestNotifications, [
                     Notifications.Request(
@@ -45,7 +45,7 @@ final class ReducerTests: XCTestCase {
         )
     }
 
-    func testAppLaunchNotificationsFetchFailure() {
+    func testFetchingNotificationsFailure() {
         let scheduler = DispatchQueue.testScheduler
         let notificationsSubject = PassthroughSubject<Notifications.Response, Error>()
         let error = NSError(domain: "test", code: 0, userInfo: nil)
@@ -61,7 +61,7 @@ final class ReducerTests: XCTestCase {
         )
 
         store.assert(
-            .send(.didFinishLaunching),
+            .send(.fetchNotifications),
             .do {
                 notificationsSubject.send(completion: .failure(error))
                 scheduler.advance()
