@@ -28,6 +28,9 @@ public let reducer = Reducer.combine(
             state.notifications = notifications
             return .none
 
+        case .statusBar(.didSelectRefresh):
+            return .init(Just(.fetchNotifications))
+
         case .statusBar(_):
             return .none
         }

@@ -69,7 +69,27 @@ final class ReducerTests: XCTestCase {
         )
     }
 
-    func testStatusBarTerminateApp() {
+    func testStatusBarRefresh() {
+        let scheduler = DispatchQueue.testScheduler
+
+        let store = TestStore(
+            initialState: State(),
+            reducer: reducer,
+            environment: Environment(
+                notificationsEndpoint: { _ in Empty().eraseToAnyPublisher() },
+                appTerminator: { _ in fatalError() },
+                mainQueue: AnyScheduler(scheduler)
+            )
+        )
+
+        store.assert(
+            .send(.statusBar(.didSelectRefresh)),
+            .receive(.fetchNotifications),
+            .do { scheduler.advance() }
+        )
+    }
+
+    func testStatusBarQuit() {
         var didTerminateApp = false
 
         let store = TestStore(
