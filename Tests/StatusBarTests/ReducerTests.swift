@@ -4,7 +4,21 @@ import ComposableArchitecture
 
 final class ReducerTests: XCTestCase {
 
-    func testTerminateApp() {
+    func testSelectingRefresh() {
+        let store = TestStore(
+            initialState: State(),
+            reducer: reducer,
+            environment: Environemnt(
+                appTerminator: { _ in fatalError() }
+            )
+        )
+
+        store.assert(
+            .send(.didSelectRefresh)
+        )
+    }
+
+    func testSelectingQuit() {
         var didTerminateApp = false
 
         let store = TestStore(

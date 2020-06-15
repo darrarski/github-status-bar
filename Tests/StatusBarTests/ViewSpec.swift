@@ -57,14 +57,25 @@ class ViewSpec: QuickSpec {
             }
 
             it("should menu have correct items") {
-                expect(sut.menu.items).to(haveCount(1))
-                let itemTitles = sut.menu.items.map(\.title)
-                expect(itemTitles) == ["Quit"]
+                expect(sut.menu.items.map(MenuItem.from(menuItem:))) == [
+                    .init(title: "Refresh"),
+                    .init(title: "Quit")
+                ]
+            }
+
+            context("when refresh is selected") {
+                beforeEach {
+                    sut.menu.performActionForItem(at: 0)
+                }
+
+                it("should send action") {
+                    expect(didReceiveActions) == [.didSelectRefresh]
+                }
             }
 
             context("when quit is selected") {
                 beforeEach {
-                    sut.menu.performActionForItem(at: 0)
+                    sut.menu.performActionForItem(at: 1)
                 }
 
                 it("should send action") {
@@ -101,6 +112,7 @@ class ViewSpec: QuickSpec {
                             .init(title: "Notification 5")
                         ]),
                         .init(title: ""),
+                        .init(title: "Refresh"),
                         .init(title: "Quit")
                     ]
                 }

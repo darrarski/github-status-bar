@@ -38,6 +38,9 @@ public final class View {
             }
             menu.items.append(.separator())
         }
+        menu.items.append(MenuItem(title: "Refresh", action: { [weak self] in
+            self?.viewStore.send(.didSelectRefresh)
+        }))
         menu.items.append(MenuItem(title: "Quit", action: { [weak self] in
             self?.viewStore.send(.didSelectQuit)
         }))
