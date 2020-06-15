@@ -76,7 +76,7 @@ class ViewSpec: QuickSpec {
 
                 beforeEach {
                     newState = ViewStore(testStore).state
-                    newState.notifications = [.fixture]
+                    newState.notifications = [.fixture()]
                     ViewStore(testStore).send(.update(newState))
                 }
 

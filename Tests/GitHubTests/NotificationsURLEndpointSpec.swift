@@ -86,7 +86,7 @@ class NotificationsURLEndpointSpec: QuickSpec {
 
                 it("should complete with response") {
                     expect(didReceiveResponse).to(haveCount(1))
-                    expect(didReceiveResponse.first?.notifications).to(equalDiff([.fixture]))
+                    expect(didReceiveResponse.first?.notifications).to(equalDiff([.fixture()]))
                     expect(didCompleteWithSuccess) == true
                     expect(didCompleteWithError).to(beNil())
                 }

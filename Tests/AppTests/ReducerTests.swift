@@ -36,11 +36,11 @@ final class ReducerTests: XCTestCase {
                         all: true
                     )
                 ])
-                notificationsSubject.send(.init(notifications: [.fixture]))
+                notificationsSubject.send(.init(notifications: [.fixture()]))
                 scheduler.advance()
             },
-            .receive(.didFetchNotifications([.fixture])) {
-                $0.notifications = [.fixture]
+            .receive(.didFetchNotifications([.fixture()])) {
+                $0.notifications = [.fixture()]
             }
         )
     }
