@@ -15,6 +15,7 @@ final class ReducerTests: XCTestCase {
             initialState: State(),
             reducer: reducer,
             environment: Environment(
+                auth: .stub,
                 notificationsEndpoint: { request in
                     didRequestNotifications.append(request)
                     return notificationsSubject.first().eraseToAnyPublisher()
@@ -29,10 +30,7 @@ final class ReducerTests: XCTestCase {
             .do {
                 XCTAssertEqual(didRequestNotifications, [
                     Notifications.Request(
-                        auth: Auth(
-                            username: "user",
-                            accessToken: "access-token"
-                        ),
+                        auth: .stub,
                         all: true
                     )
                 ])
@@ -54,6 +52,7 @@ final class ReducerTests: XCTestCase {
             initialState: State(),
             reducer: reducer,
             environment: Environment(
+                auth: .stub,
                 notificationsEndpoint: { _ in notificationsSubject.first().eraseToAnyPublisher() },
                 appTerminator: { _ in fatalError() },
                 mainQueue: AnyScheduler(scheduler)
@@ -76,6 +75,7 @@ final class ReducerTests: XCTestCase {
             initialState: State(),
             reducer: reducer,
             environment: Environment(
+                auth: .stub,
                 notificationsEndpoint: { _ in Empty().eraseToAnyPublisher() },
                 appTerminator: { _ in fatalError() },
                 mainQueue: AnyScheduler(scheduler)
@@ -96,6 +96,7 @@ final class ReducerTests: XCTestCase {
             initialState: State(),
             reducer: reducer,
             environment: Environment(
+                auth: .stub,
                 notificationsEndpoint: { _ in fatalError() },
                 appTerminator: { _ in didTerminateApp = true },
                 mainQueue: AnyScheduler(DispatchQueue.testScheduler)

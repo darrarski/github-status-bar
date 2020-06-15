@@ -9,15 +9,7 @@ public let reducer = Reducer.combine(
     Reducer { state, action, env in
         switch action {
         case .fetchNotifications:
-            let request: Notifications.Request = .init(
-                auth: Auth( // TODO: get credentials from key-chain
-                    username: "user",
-                    accessToken: "access-token"
-                ),
-                all: true
-            )
-
-            return env.notificationsEndpoint(request)
+            return env.notificationsEndpoint(.init(auth: env.auth, all: true))
                 .map(\.notifications)
                 .map(Action.didFetchNotifications)
                 .catch { _ in Empty() }
