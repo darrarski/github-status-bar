@@ -76,12 +76,18 @@ class ViewSpec: QuickSpec {
 
                 beforeEach {
                     newState = ViewStore(testStore).state
-                    newState.notifications = [.fixture()]
+                    newState.notifications = [
+                        .fixture(id: "1", unread: true),
+                        .fixture(id: "2", unread: true),
+                        .fixture(id: "3", unread: false),
+                        .fixture(id: "4", unread: false),
+                        .fixture(id: "5", unread: false)
+                    ]
                     ViewStore(testStore).send(.update(newState))
                 }
 
                 it("should update item title") {
-                    expect(sut.item.button?.title) == "GitHub (1)"
+                    expect(sut.item.button?.title) == "GitHub (2)"
                 }
             }
         }

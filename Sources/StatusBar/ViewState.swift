@@ -9,7 +9,7 @@ extension ViewState {
 
     private static func title(for state: State) -> String {
         var title = "GitHub"
-        let notificationsCount = state.notifications.count
+        let notificationsCount = state.notifications.filter(\.unread).count
         if notificationsCount > 0 {
             title.append(" (\(notificationsCount))")
         }
