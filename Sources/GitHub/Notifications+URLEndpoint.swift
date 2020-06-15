@@ -22,6 +22,7 @@ extension Notifications {
 
         var urlRequest = URLRequest(url: urlComponents.url!)
         urlRequest.httpMethod = "GET"
+        urlRequest.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
 
         let username = request.auth.username
         let accessToken = request.auth.accessToken

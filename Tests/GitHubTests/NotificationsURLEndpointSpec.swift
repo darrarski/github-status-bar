@@ -68,6 +68,7 @@ class NotificationsURLEndpointSpec: QuickSpec {
                 expect(didURLRequest.first?.httpMethod) == "GET"
                 expect(didURLRequest.first?.value(forHTTPHeaderField: "Authorization"))
                     == "Basic \("user:1234".data(using: .utf8)!.base64EncodedString())"
+                expect(didURLRequest.first?.cachePolicy) == .reloadIgnoringLocalAndRemoteCacheData
             }
 
             context("when correct URL response is received") {
