@@ -22,15 +22,29 @@ public final class View {
 
     private func update(viewState: ViewState) {
         item.button?.title = "GitHub"
-        let unreadNotifications = viewState.notifications.filter(\.unread)
-        if unreadNotifications.isEmpty == false {
-            item.button?.title.append(" (\(unreadNotifications.count))")
+        menu.items = []
+        if viewState.notifications.isEmpty == false {
+            let unreadNotifications = viewState.notifications.filter(\.unread)
+            if unreadNotifications.isEmpty == false {
+                item.button?.title.append(" (\(unreadNotifications.count))")
+                menu.items.append(contentsOf: unreadNotifications.map(menuItem(for:)))
+            }
+            let readNotifications = viewState.notifications.filter(\.read)
+            if readNotifications.isEmpty == false {
+                menu.items.append(MenuItem(
+                    title: "Read",
+                    subitems: readNotifications.map(menuItem(for:))
+                ))
+            }
+            menu.items.append(.separator())
         }
-        menu.items = [
-            MenuItem(title: "Quit", action: { [weak self] in
-                self?.viewStore.send(.didSelectQuit)
-            })
-        ]
+        menu.items.append(MenuItem(title: "Quit", action: { [weak self] in
+            self?.viewStore.send(.didSelectQuit)
+        }))
+    }
+
+    private func menuItem(for notification: ViewState.Notification) -> NSMenuItem {
+        MenuItem(title: notification.title)
     }
 
 }

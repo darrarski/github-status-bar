@@ -4,6 +4,7 @@ import Foundation
 extension Notification {
     static func fixture(
         id: String = "1",
+        title: String = "Greetings",
         unread: Bool = true
     ) -> Notification {
         .init(
@@ -77,7 +78,7 @@ extension Notification {
                 treesUrl: "http://api.github.com/repos/octocat/Hello-World/git/trees{/sha}"
             ),
             subject: .init(
-                title: "Greetings",
+                title: title,
                 url: "https://api.github.com/repos/octokit/octokit.rb/issues/123",
                 latestCommentUrl: "https://api.github.com/repos/octokit/octokit.rb/issues/comments/123",
                 type: "Issue"

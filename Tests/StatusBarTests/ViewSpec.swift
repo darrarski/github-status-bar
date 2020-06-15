@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+import Difference
 @testable import StatusBar
 @testable import GitHub
 import Cocoa
@@ -77,23 +78,49 @@ class ViewSpec: QuickSpec {
                 beforeEach {
                     newState = ViewStore(testStore).state
                     newState.notifications = [
-                        .fixture(id: "1", unread: true),
-                        .fixture(id: "2", unread: true),
-                        .fixture(id: "3", unread: false),
-                        .fixture(id: "4", unread: false),
-                        .fixture(id: "5", unread: false)
+                        .fixture(id: "1", title: "Notification 1", unread: true),
+                        .fixture(id: "2", title: "Notification 2", unread: true),
+                        .fixture(id: "3", title: "Notification 3", unread: false),
+                        .fixture(id: "4", title: "Notification 4", unread: false),
+                        .fixture(id: "5", title: "Notification 5", unread: false)
                     ]
                     ViewStore(testStore).send(.update(newState))
                 }
 
-                it("should update item title") {
+                it("should item have correct title") {
                     expect(sut.item.button?.title) == "GitHub (2)"
+                }
+
+                it("should menu have correct items") {
+                    expect(sut.menu.items.map(MenuItem.from(menuItem:))) == [
+                        .init(title: "Notification 1"),
+                        .init(title: "Notification 2"),
+                        .init(title: "Read", subitems: [
+                            .init(title: "Notification 3"),
+                            .init(title: "Notification 4"),
+                            .init(title: "Notification 5")
+                        ]),
+                        .init(title: ""),
+                        .init(title: "Quit")
+                    ]
                 }
             }
         }
 
         it("MenuItem should not support NSCoding") {
-            expect { _ = MenuItem(coder: NSCoder()) }.to(throwAssertion())
+            expect { _ = StatusBar.MenuItem(coder: NSCoder()) }.to(throwAssertion())
         }
+    }
+}
+
+private struct MenuItem: Equatable {
+    var title: String
+    var subitems: [MenuItem]? = nil
+
+    static func from(menuItem: NSMenuItem) -> MenuItem {
+        .init(
+            title: menuItem.title,
+            subitems: menuItem.submenu?.items.map(MenuItem.from(menuItem:))
+        )
     }
 }
