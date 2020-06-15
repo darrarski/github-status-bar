@@ -21,7 +21,11 @@ public final class View {
     private var cancellables = Set<AnyCancellable>()
 
     private func update(viewState: ViewState) {
-        item.button?.title = viewState.title
+        item.button?.title = "GitHub"
+        let unreadNotifications = viewState.notifications.filter(\.unread)
+        if unreadNotifications.isEmpty == false {
+            item.button?.title.append(" (\(unreadNotifications.count))")
+        }
         menu.items = [
             MenuItem(title: "Quit", action: { [weak self] in
                 self?.viewStore.send(.didSelectQuit)
