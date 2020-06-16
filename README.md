@@ -34,9 +34,9 @@ Replace environment variables with your actual credentials.
 
 ### Setup
 
-Open `Package.swift` in Xcode. 
+Open `Package.swift` in Xcode.You can run the app using `github-status-bar` shared build scheme. 
 
-You can run the app using `github-status-bar` shared build scheme. The GitHub credentials can be set in the scheme configuration:
+The GitHub credentials can be set in the scheme configuration:
 
 ![xcode-scheme-environment-variables.png](Docs/xcode-scheme-environment-variables.png)
 
