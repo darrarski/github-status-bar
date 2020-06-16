@@ -19,57 +19,48 @@ public let reducer = Reducer { state, action, env in
     }
 }
 
+// TODO: move to GitHub
+
 private func url(for notification: GitHub.Notification) -> URL? {
     if let url = issueUrl(for: notification) {
         return url
     } else if let url = pullRequestUrl(for: notification) {
         return url
-    } else if let url = repoUrl(for: notification) {
-        return url
     }
-    return nil
+    return repoUrl(for: notification)
 }
 
 private func issueUrl(for notification: GitHub.Notification) -> URL? {
-    let input = notification.subject.url
     let pattern = #"^https:\/\/api.github.com\/repos\/([^\/]+)\/([^\/]+)\/issues\/([0-9]+)$"#
-    let regex = try! NSRegularExpression(pattern: pattern)
-    let range = NSRange(input.startIndex..<input.endIndex, in: input)
-    guard let match = regex.firstMatch(in: input, options: [], range: range),
-        match.numberOfRanges == 4,
-        let owner = Range(match.range(at: 1), in: input).map({ input[$0] }),
-        let repo = Range(match.range(at: 2), in: input).map({ input[$0] }),
-        let id = Range(match.range(at: 3), in: input).map({ input[$0] })
-        else { return nil }
-
-    return URL(string: "https://github.com/\(owner)/\(repo)/issues/\(id)")
+    return notification.subject.url.firstMatch(of: pattern)
+        .map { match in "https://github.com/\(match[1])/\(match[2])/issues/\(match[3])" }
+        .map { URL(string: $0) } as? URL
 }
 
 private func pullRequestUrl(for notification: GitHub.Notification) -> URL? {
-    let input = notification.subject.url
     let pattern = #"^https:\/\/api.github.com\/repos\/([^\/]+)\/([^\/]+)\/pulls\/([0-9]+)$"#
-    let regex = try! NSRegularExpression(pattern: pattern)
-    let range = NSRange(input.startIndex..<input.endIndex, in: input)
-    guard let match = regex.firstMatch(in: input, options: [], range: range),
-        match.numberOfRanges == 4,
-        let owner = Range(match.range(at: 1), in: input).map({ input[$0] }),
-        let repo = Range(match.range(at: 2), in: input).map({ input[$0] }),
-        let id = Range(match.range(at: 3), in: input).map({ input[$0] })
-        else { return nil }
-
-    return URL(string: "https://github.com/\(owner)/\(repo)/pull/\(id)")
+    return notification.subject.url.firstMatch(of: pattern)
+        .map { match in "https://github.com/\(match[1])/\(match[2])/pull/\(match[3])" }
+        .map { URL(string: $0) } as? URL
 }
 
 private func repoUrl(for notification: GitHub.Notification) -> URL? {
-    let input = notification.subject.url
     let pattern = #"^https:\/\/api.github.com\/repos\/([^\/]+)\/([^\/]+)$"#
-    let regex = try! NSRegularExpression(pattern: pattern)
-    let range = NSRange(input.startIndex..<input.endIndex, in: input)
-    guard let match = regex.firstMatch(in: input, options: [], range: range),
-        match.numberOfRanges == 3,
-        let owner = Range(match.range(at: 1), in: input).map({ input[$0] }),
-        let repo = Range(match.range(at: 2), in: input).map({ input[$0] })
-        else { return nil }
+    return notification.subject.url.firstMatch(of: pattern)
+        .map { match in "https://github.com/\(match[1])/\(match[2])" }
+        .map { URL(string: $0) } as? URL
+}
 
-    return URL(string: "https://github.com/\(owner)/\(repo)")
+private extension String {
+    func firstMatch(of pattern: String) -> [String]? {
+        let regex = try! NSRegularExpression(pattern: pattern)
+        let range = NSRange(startIndex..<endIndex, in: self)
+        guard let match = regex.firstMatch(in: self, options: [], range: range),
+            match.numberOfRanges == regex.numberOfCaptureGroups + 1
+            else { return nil }
+
+        return (0..<match.numberOfRanges)
+                .map { Range(match.range(at: $0), in: self)! }
+                .map { String(self[$0]) }
+    }
 }
