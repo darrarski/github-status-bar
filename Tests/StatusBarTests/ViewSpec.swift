@@ -69,7 +69,7 @@ class ViewSpec: QuickSpec {
                 }
 
                 it("should send action") {
-                    expect(didReceiveActions) == [.didSelectRefresh]
+                    expect(didReceiveActions) == [.refresh]
                 }
             }
 
@@ -79,7 +79,7 @@ class ViewSpec: QuickSpec {
                 }
 
                 it("should send action") {
-                    expect(didReceiveActions) == [.didSelectQuit]
+                    expect(didReceiveActions) == [.quit]
                 }
             }
 

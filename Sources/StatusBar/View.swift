@@ -39,10 +39,10 @@ public final class View {
             menu.items.append(.separator())
         }
         menu.items.append(MenuItem(title: "Refresh", action: { [weak self] in
-            self?.viewStore.send(.didSelectRefresh)
+            self?.viewStore.send(.refresh)
         }))
         menu.items.append(MenuItem(title: "Quit", action: { [weak self] in
-            self?.viewStore.send(.didSelectQuit)
+            self?.viewStore.send(.quit)
         }))
     }
 

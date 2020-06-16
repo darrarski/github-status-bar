@@ -4,9 +4,9 @@ public typealias Reducer = ComposableArchitecture.Reducer<State, Action, Environ
 
 public let reducer = Reducer { state, action, env in
     switch action {
-    case .didSelectRefresh:
+    case .refresh:
         return .none
-    case .didSelectQuit:
+    case .quit:
         env.appTerminator(nil)
         return .none
     }

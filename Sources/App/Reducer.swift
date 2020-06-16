@@ -8,7 +8,8 @@ public typealias Reducer = ComposableArchitecture.Reducer<State, Action, Environ
 public let reducer = Reducer.combine(
     Reducer { state, action, env in
         switch action {
-        case .fetchNotifications:
+        case .fetchNotifications,
+             .statusBar(.refresh):
             return env.notificationsEndpoint(.init(auth: env.auth, all: true))
                 .map(\.notifications)
                 .map(Action.didFetchNotifications)
@@ -20,10 +21,7 @@ public let reducer = Reducer.combine(
             state.notifications = notifications
             return .none
 
-        case .statusBar(.didSelectRefresh):
-            return .init(Just(.fetchNotifications))
-
-        case .statusBar(_):
+        case .statusBar(.quit):
             return .none
         }
     },

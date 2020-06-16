@@ -4,7 +4,7 @@ import ComposableArchitecture
 
 final class ReducerTests: XCTestCase {
 
-    func testSelectingRefresh() {
+    func testRefresh() {
         let store = TestStore(
             initialState: State(),
             reducer: reducer,
@@ -14,11 +14,11 @@ final class ReducerTests: XCTestCase {
         )
 
         store.assert(
-            .send(.didSelectRefresh)
+            .send(.refresh)
         )
     }
 
-    func testSelectingQuit() {
+    func testQuit() {
         var didTerminateApp = false
 
         let store = TestStore(
@@ -30,7 +30,7 @@ final class ReducerTests: XCTestCase {
         )
 
         store.assert(
-            .send(.didSelectQuit),
+            .send(.quit),
             .do { XCTAssert(didTerminateApp) }
         )
     }

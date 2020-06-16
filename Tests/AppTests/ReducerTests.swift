@@ -6,7 +6,7 @@ import ComposableArchitecture
 
 final class ReducerTests: XCTestCase {
 
-    func testFetchingNotifications() {
+    func testFetchNotifications() {
         let scheduler = DispatchQueue.testScheduler
         let notificationsSubject = PassthroughSubject<Notifications.Response, Error>()
         var didRequestNotifications: [Notifications.Request] = []
@@ -18,8 +18,7 @@ final class ReducerTests: XCTestCase {
                 auth: .stub,
                 notificationsEndpoint: { request in
                     didRequestNotifications.append(request)
-                    return notificationsSubject.first().eraseToAnyPublisher()
-            },
+                    return notificationsSubject.first().eraseToAnyPublisher() },
                 appTerminator: { _ in fatalError() },
                 mainQueue: AnyScheduler(scheduler)
             )
@@ -43,7 +42,7 @@ final class ReducerTests: XCTestCase {
         )
     }
 
-    func testFetchingNotificationsFailure() {
+    func testFetchNotificationsFailure() {
         let scheduler = DispatchQueue.testScheduler
         let notificationsSubject = PassthroughSubject<Notifications.Response, Error>()
         let error = NSError(domain: "test", code: 0, userInfo: nil)
@@ -70,22 +69,32 @@ final class ReducerTests: XCTestCase {
 
     func testStatusBarRefresh() {
         let scheduler = DispatchQueue.testScheduler
+        var didRequestNotifications: [Notifications.Request] = []
 
         let store = TestStore(
             initialState: State(),
             reducer: reducer,
             environment: Environment(
                 auth: .stub,
-                notificationsEndpoint: { _ in Empty().eraseToAnyPublisher() },
+                notificationsEndpoint: { request in
+                    didRequestNotifications.append(request)
+                    return Empty().eraseToAnyPublisher() },
                 appTerminator: { _ in fatalError() },
                 mainQueue: AnyScheduler(scheduler)
             )
         )
 
         store.assert(
-            .send(.statusBar(.didSelectRefresh)),
-            .receive(.fetchNotifications),
-            .do { scheduler.advance() }
+            .send(.statusBar(.refresh)),
+            .do {
+                XCTAssertEqual(didRequestNotifications, [
+                    Notifications.Request(
+                        auth: .stub,
+                        all: true
+                    )
+                ])
+                scheduler.advance()
+            }
         )
     }
 
@@ -104,7 +113,7 @@ final class ReducerTests: XCTestCase {
         )
 
         store.assert(
-            .send(.statusBar(.didSelectQuit)),
+            .send(.statusBar(.quit)),
             .do { XCTAssert(didTerminateApp) }
         )
     }
