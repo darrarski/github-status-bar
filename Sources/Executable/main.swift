@@ -20,6 +20,7 @@ let appView: View = .init(store: .init(
             accessToken: accessToken
         ),
         notificationsEndpoint: Notifications.urlEndpoint(),
+        urlOpener: { NSWorkspace.shared.open($0) },
         appTerminator: app.terminate(_:),
         mainQueue: AnyScheduler(DispatchQueue.main)
     )

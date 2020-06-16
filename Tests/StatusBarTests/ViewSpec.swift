@@ -116,6 +116,16 @@ class ViewSpec: QuickSpec {
                         .init(title: "Quit")
                     ]
                 }
+
+                context("when notification menu item is selected") {
+                    beforeEach {
+                        sut.menu.performActionForItem(at: 1)
+                    }
+
+                    it("should send action") {
+                        expect(didReceiveActions) == [.openNotification(id: "2")]
+                    }
+                }
             }
         }
 

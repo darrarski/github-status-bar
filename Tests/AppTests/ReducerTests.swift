@@ -19,6 +19,7 @@ final class ReducerTests: XCTestCase {
                 notificationsEndpoint: { request in
                     didRequestNotifications.append(request)
                     return notificationsSubject.first().eraseToAnyPublisher() },
+                urlOpener: { _ in fatalError() },
                 appTerminator: { _ in fatalError() },
                 mainQueue: AnyScheduler(scheduler)
             )
@@ -53,6 +54,7 @@ final class ReducerTests: XCTestCase {
             environment: Environment(
                 auth: .stub,
                 notificationsEndpoint: { _ in notificationsSubject.first().eraseToAnyPublisher() },
+                urlOpener: { _ in fatalError() },
                 appTerminator: { _ in fatalError() },
                 mainQueue: AnyScheduler(scheduler)
             )
@@ -79,6 +81,7 @@ final class ReducerTests: XCTestCase {
                 notificationsEndpoint: { request in
                     didRequestNotifications.append(request)
                     return Empty().eraseToAnyPublisher() },
+                urlOpener: { _ in fatalError() },
                 appTerminator: { _ in fatalError() },
                 mainQueue: AnyScheduler(scheduler)
             )
@@ -107,6 +110,7 @@ final class ReducerTests: XCTestCase {
             environment: Environment(
                 auth: .stub,
                 notificationsEndpoint: { _ in fatalError() },
+                urlOpener: { _ in fatalError() },
                 appTerminator: { _ in didTerminateApp = true },
                 mainQueue: AnyScheduler(DispatchQueue.testScheduler)
             )

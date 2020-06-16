@@ -21,7 +21,7 @@ public let reducer = Reducer.combine(
             state.notifications = notifications
             return .none
 
-        case .statusBar(.quit):
+        case .statusBar(_):
             return .none
         }
     },

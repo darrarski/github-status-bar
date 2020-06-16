@@ -5,7 +5,8 @@ extension Notification {
     static func fixture(
         id: String = "1",
         title: String = "Greetings",
-        unread: Bool = true
+        unread: Bool = true,
+        url: String = "https://api.github.com/repos/octokit/octokit.rb/issues/123"
     ) -> Notification {
         .init(
             id: id,
@@ -79,7 +80,7 @@ extension Notification {
             ),
             subject: .init(
                 title: title,
-                url: "https://api.github.com/repos/octokit/octokit.rb/issues/123",
+                url: url,
                 latestCommentUrl: "https://api.github.com/repos/octokit/octokit.rb/issues/comments/123",
                 type: "Issue"
             ),

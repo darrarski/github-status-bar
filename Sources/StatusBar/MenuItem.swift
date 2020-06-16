@@ -2,11 +2,6 @@ import Cocoa
 
 final class MenuItem: NSMenuItem {
 
-    init(title: String) {
-        actionClosure = nil
-        super.init(title: title, action: nil, keyEquivalent: "")
-    }
-
     init(title: String, action: @escaping () -> Void) {
         self.actionClosure = action
         super.init(title: title, action: #selector(menuItemAction), keyEquivalent: "")

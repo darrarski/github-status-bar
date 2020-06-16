@@ -47,7 +47,9 @@ public final class View {
     }
 
     private func menuItem(for notification: ViewState.Notification) -> NSMenuItem {
-        MenuItem(title: notification.title)
+        MenuItem(title: notification.title, action: { [weak self] in
+            self?.viewStore.send(.openNotification(id: notification.id))
+        })
     }
 
 }
