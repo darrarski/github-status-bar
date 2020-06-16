@@ -168,7 +168,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "GITHUB_USERNAME"
-            value = "username"
+            value = "user"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
