@@ -1,7 +1,7 @@
 # GitHub Status Bar macOS App
 
 ![swift: v5.2](https://img.shields.io/badge/swift-v5.2-orange.svg)
-![platform: macOS](https://img.shields.io/badge/platform-maxOS-blue.svg)
+![platform: macOS](https://img.shields.io/badge/platform-macOS-blue.svg)
 ![deployment target: v10.15](https://img.shields.io/badge/deployment%20target-v10.15-blueviolet)
 ![code coverage: 100%](https://img.shields.io/badge/code%20coverage-100%25-success)
 
