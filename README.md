@@ -67,6 +67,10 @@ Dependency|Description
 [Nimble](https://github.com/Quick/Nimble)|Assertion matcher framework used in test targets
 [Difference](https://github.com/krzysztofzablocki/Difference)|Assertion helper framework used in test targets
 
+## ☕️ Do you like the project?
+
+<a href="https://www.buymeacoffee.com/darrarski" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="60" width="217" style="height: 60px !important;width: 217px !important;" ></a>
+
 ## 📄 License
 
 Copyright © 2020 [Dariusz Rybicki Darrarski](http://www.darrarski.pl)
